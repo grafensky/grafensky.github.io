@@ -1,7 +1,1429 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1> ... </h1>
-<p> ..111. </p>
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<title>Events Calendar</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="csrf-token" content="fA8qli1Q">
+<meta name="viewport" content="initial-scale=1, width=device-width, user-scalable=yes">
+<link rel="stylesheet" type="text/css" href="/mirror/v18/tla4.min.css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet" type="text/css"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" src="/mirror/v20/functions4.min.js"></script>
+<link rel="icon" href="/favicon.png">
+<link rel="canonical" href="http://www.liquiddota.com/calendar/"><!--[if lt IE 9]>
+	<script src="/mirror/html5shiv-printshiv.js"></script>
+<![endif]-->
+</head>
+<body  onload="resize_images2()">
+<div id="navwrapper">
+    <div id="siteheader">
+    <div id="userpanel">
+		<ul>
+			<li><a class="toggle_link" href="/mytlnet/login.php">Log In</a></li>
+			<li class="guestlink"><a href="/mytlnet/register.php">Register</a></li>
+			<li class="goldcount"><a href="/mytlnet/store.php"><span id="smallgold" class="goldico"></span> <span id="goldnumber">Shop</span></a></li>
+			<!--<li><a href="" id="up_drop" class="upicons tb-sprite toggle_link" title="Log In"></a></li>-->
+		</ul>
+		<div id="userpanelend"></div>
+	</div>
+	<div id="up_dropdown" style="">
+		<div id="up_dropdown_content" class="pinned">
+<div id="loginbox">
+<form method="post" action="/mytlnet/login.php">
+	<input type="hidden" name="token" value="fA8qli1Q">
+	<table>
+	<tr>
+		<td><label for="loginname">Username</label></td>
+		<td><input class="text" type="text" size="12" name="loginname" id="loginname" tabindex="1" required="required"></td>
+	</tr>
+	<tr>
+		<td><label for="loginpasswd">Password</label></td>
+		<td><input class="text" type="password" size="12" name="loginpasswd" id="loginpasswd" tabindex="2" required="required"></td>
+	</tr>
+	<tr>
+		<td>
+		<button id="loginsubmit" type="submit" tabindex="3">Log In</button>
+		</td>
+		<td id="crossdomainloginbox" style="display:none">
+		<button id="crossdomainsubmit" type="button" tabindex="4" title="Login with your teamliquid.net account"><img alt="Login with TL" src="/images/layout/tl-login.png"> <span id="crossdomainname"></span></button>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="checkbox" name="makeAcookie" id="makeAcookie" value="1" tabindex="5">
+			<label for="makeAcookie">Remember Me</label>
+		</td>
+	</tr>
+	</table>
+	<input type="hidden" name="stage" value="1">
+	<input type="hidden" name="back_url" value="/calendar/?view=month&amp;year=2015&amp;month=11&amp;day=2&amp;team=&amp;league=">
+</form>
+</div>
+		</div>
+		<!--<div id="up_dropdown_end">-
+		</div>-->
+	</div>
+	<div class="topmenubar">
+		<div class="navmenu">
+			Liquid`
+			<span class="sn_dropdown"></span>
+		</div>
+		<div class="top_menu">
+			<span><a href="http://www.teamliquid.net/">TeamLiquid</a></span>
+			<span><a href="http://www.teamliquidpro.com/">TeamLiquidPro</a></span>
+			<span><a href="http://www.liquidhearth.com/">LiquidHearth</a></span>
+			<span><a href="http://www.liquidlegends.net/">LiquidLegends</a></span>
+			<span><a href="http://wiki.teamliquid.net/dota2/Main_Page">Liquipedia</a></span>
+			<span><a href="http://www.liquidpoker.net/">LiquidPoker</a></span>
+		</div>
+		<div class="social">
+			<!--<a href="https://www.facebook.com/teamliquidnet" class="topmenuicons" id="tb-facebook"></a>-->
+			<a href="https://twitter.com/liquiddota" class="topmenuicons" id="tb-twitter"></a>
+			<a href="http://www.youtube.com/teamliquidnet" class="topmenuicons" id="tb-youtube"></a>
+		</div>
+	</div>
+
+	<div id="tlverytopbanner">
+		<a href="/" id="homelink"></a>
+		<div id="stats">
+						<!--Active: 467--><!--<span><a id="topstreamlink" href="/video/streams/">Stream viewers: </a></span>-->
+		</div>
+		<div id="countdown"></div>
+	</div>
+	<div class="navbar" id="navwrap">
+		<div class="navmenu"></div>
+		<ul class="smallnav">
+			<!--<li class="tb-sprite smallnavstart"></li>-->
+			<li><a href="/">Home</a></li>
+			<li><a href="/forum/">Forum</a></li>
+			<li><a href="/stream/">Live Streams</a></li>
+			<li><a href="/calendar/">Calendar</a></li>
+			<li class="tl-dropdown" id="lp-dropdown" data-dropdown="dropdown-menu-liquipedia"><a href="http://wiki.teamliquid.net/dota2/Main_Page">Liquipedia <span class="sn_dropdown"></span></a></li>
+			<li><a href="http://www.teamliquid.net/store/">Store</a></li>
+		</ul>
+
+		<ul id="filters">
+			<li class="search">
+				<form id="searchbox" action="/forum/search.php" method="get">
+				<div>
+					<a class="tb-sprite" onclick="$('#searchbox').submit(); return false" href="/forum/search.php" title="Search"></a>
+				<input type="text" maxlength="32" size="23" name="q" id="searchicon">
+				</div>	
+				</form>
+			</li>
+
+		</ul>
+
+		<div class="clear"></div>
+	</div>
+
+	<div class="navbar submenu" id="dropdown-menu-liquipedia" data-top-menu="lp-dropdown" style="display:none;position:absolute;left:100px;z-index:10;margin-top:-3px">
+	<ul class="smallnav subnav">
+		<li><a href="http://wiki.teamliquid.net/dota2/Portal:Heroes">Heroes</a></li>
+		<li><a href="http://wiki.teamliquid.net/dota2/Portal:Items">Items</a></li>
+		<li><a href="http://wiki.teamliquid.net/dota2/Portal:Store">Store</a></li>
+		<li><a href="http://wiki.teamliquid.net/dota2/Portal:Players">Players</a></li>
+		<li><a href="http://wiki.teamliquid.net/dota2/Portal:Teams">Teams</a></li>
+		<li><a href="http://wiki.teamliquid.net/dota2/Recent_Tournament_Results">Recent Results</a></li>
+	</ul>
+	</div>
+
+	</div>
+	<div style="height:4px"></div>
+<!-- google_ad_section_start --><div id="main-content-wide"><h1 class="title">Events Calendar</h1><div id="aa" style="padding: 5px; max-width:736px;  height:90px;margin-left:auto;margin-right:auto;display:block;margin-top:0px;padding-bottom:0px"><div id="aa_content"><div style="max-width:736px;  height:90px; overflow: hidden; padding: 0px; text-align: center; margin: 0px; margin-top:0px" id="aa_container"><!-- /23616703/LiquidDota_728x90_Other_BTF1 -->
+<div id='div-gpt-ad-1444255349322-13'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1444255349322-13'); });
+</script>
+</div></div></div></div><div style="text-align:center;padding-bottom:10px"></div><div id="calendar">
+	<div class="calhead">
+		<div>
+			<div><button class="switchview" data-view="week">7-day</button><button class="switchview" data-view="month">Month</button></div>
+			<div class="calflip"><button class="switchday" data-year="2015" data-month="10" data-day="1" title="Previous Month"><span></span></button><button class="switchday" data-year="2015" data-month="12" data-day="1" title="Next Month"><span></span></button><span>November 2015. All times are IST (current time: 8:04 am).</span></div>
+		</div><div><div class="calfilter"><span>Filter by:</span>
+			<select name="team" id="team_filter" class="filterlist">
+				<option value="">Team...</option>
+				<option value="313">123</option>
+				<option value="210">4Anchors</option>
+				<option value="306">4C&amp;L</option>
+				<option value="319">5Jungz</option>
+				<option value="69">All-Star A</option>
+				<option value="70">All-Star B</option>
+				<option value="3">Alliance</option>
+				<option value="96">Arcanys</option>
+				<option value="311">Archon</option>
+				<option value="263">aSpera</option>
+				<option value="304">ATN</option>
+				<option value="120">BBC</option>
+				<option value="244">BHeart</option>
+				<option value="266">Boreal</option>
+				<option value="338">BRM</option>
+				<option value="10">C9</option>
+				<option value="40">CDEC</option>
+				<option value="329">CDEC.Y</option>
+				<option value="333">CIS-R</option>
+				<option value="192">coL</option>
+				<option value="322">Danish Bears</option>
+				<option value="315">DC</option>
+				<option value="4">DK</option>
+				<option value="344">DK.S</option>
+				<option value="328">DUOBAO</option>
+				<option value="105">Duza</option>
+				<option value="339">E.Wolves</option>
+				<option value="6">EG</option>
+				<option value="254">EHOME</option>
+				<option value="327">EHOME.K</option>
+				<option value="11">Empire</option>
+				<option value="341">ESD</option>
+				<option value="143">evoGT</option>
+				<option value="340">FanTuan</option>
+				<option value="26">FD</option>
+				<option value="246">FIRE</option>
+				<option value="7">Fnatic</option>
+				<option value="330">FTD</option>
+				<option value="331">FTDb</option>
+				<option value="343">FTDc</option>
+				<option value="94">G7</option>
+				<option value="316">Golden Boys</option>
+				<option value="64">GOOMBA</option>
+				<option value="324">HCWP</option>
+				<option value="51">hehe</option>
+				<option value="41">HGT</option>
+				<option value="189">HR</option>
+				<option value="2">iG</option>
+				<option value="323">Imagine</option>
+				<option value="212">INTZ</option>
+				<option value="15">Isurus</option>
+				<option value="334">Kaipi</option>
+				<option value="101">Kingdom</option>
+				<option value="253">LC</option>
+				<option value="309">LD</option>
+				<option value="215">Leviathan</option>
+				<option value="33">LGD</option>
+				<option value="18">Liquid</option>
+				<option value="326">MB</option>
+				<option value="317">MFF</option>
+				<option value="22">Mineski</option>
+				<option value="60">MVP.hot6</option>
+				<option value="24">MVP.P</option>
+				<option value="65">mYi</option>
+				<option value="1">Na`Vi</option>
+				<option value="8">NewBee</option>
+				<option value="223">Newbee.Y</option>
+				<option value="252">NiP</option>
+				<option value="336">NLG</option>
+				<option value="146">Not Today</option>
+				<option value="320">NT123</option>
+				<option value="345">OG</option>
+				<option value="211">Other</option>
+				<option value="197">paiN</option>
+				<option value="49">PR</option>
+				<option value="335">PRIES</option>
+				<option value="194">Root</option>
+				<option value="28">RRQ</option>
+				<option value="180">Secret</option>
+				<option value="321">Sector V</option>
+				<option value="256">SFZ</option>
+				<option value="332">SGR</option>
+				<option value="268">Signature</option>
+				<option value="318">Spac_</option>
+				<option value="111">SS</option>
+				<option value="337">STARK</option>
+				<option value="310">TnC</option>
+				<option value="32">TongFu</option>
+				<option value="342">TRG</option>
+				<option value="12">UG</option>
+				<option value="282">Underminer</option>
+				<option value="325">Unknown.xiu</option>
+				<option value="228">Vega</option>
+				<option value="9">VG</option>
+				<option value="302">VG.P</option>
+				<option value="245">Void Boys</option>
+				<option value="44">VP</option>
+				<option value="200">Wings</option>
+				<option value="30">XCTN</option>
+				<option value="257">YSB</option>
+			</select>
+
+			<select name="league" id="league_filter" class="filterlist">
+				<option value="">League...</option>
+				<option value="122">Alienware Cup</option>
+				<option value="116">Asia Arena Cup</option>
+				<option value="126">Brasil Game Cup 2015</option>
+				<option value="118">BTS Series</option>
+				<option value="92">Corsair Gaming Arena</option>
+				<option value="15">Dota 2 Champion&#039;s League</option>
+				<option value="10">DreamLeague</option>
+				<option value="3">ECL</option>
+				<option value="124">Elimination Mode</option>
+				<option value="17">ESL One</option>
+				<option value="125">Frankfurt Major</option>
+				<option value="49">Game Show League</option>
+				<option value="90">Hitbox Championship</option>
+				<option value="7">joinDOTA League</option>
+				<option value="127">LiquidDota Community Night</option>
+				<option value="6">MLG</option>
+				<option value="82">MSI Dragon Battle</option>
+				<option value="121">Nanyang Dota 2 Championships</option>
+				<option value="115">NXTGAME Dota 2 Invitational</option>
+				<option value="117">On Art Challenge Series Season 2</option>
+				<option value="128">PGL Dota 2 Pro-AM</option>
+				<option value="108">ProDota Cup</option>
+				<option value="123">Red Bull Gaming Ground</option>
+				<option value="44">SEA Dragon Battle</option>
+				<option value="14">StarSeries</option>
+				<option value="105">Sudamerican Master</option>
+				<option value="120">The Defense</option>
+				<option value="18">The International</option>
+				<option value="20">The Summit</option>
+				<option value="104">Uprise Champions Cup</option>
+				<option value="57">World Cyber Arena</option>
+			</select>
+		</div><div class="calsubmit"><button>Add Event</button></div></div>
+		<input type="hidden" name="calendar_view" id="calendar_view" value="month">
+		<input type="hidden" name="calendar_month" id="calendar_month" value="11">
+		<input type="hidden" name="calendar_year" id="calendar_year" value="2015">
+		<input type="hidden" name="calendar_day" id="calendar_day" value="1">
+	</div>
+	<table id="evcal" class="viewmo">
+		<thead><tr>
+	<th>Sunday	<th>Monday	<th>Tuesday	<th>Wednesday	<th>Thursday	<th>Friday	<th>Saturday		</tr></thead>
+		<tbody>
+			<tr>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Saturday</span>
+November							1						</div>
+						<div class="ev-feed" data-day="1">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l121"></span></div><div class="ev-ctrl"><span data-event-id="3270">Nanyang Dota 2 Championships</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">LAN Day 6</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Secret vs VG</span><span class="ev-timer">15:45</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3218">Game Show League</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">SEA Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>MVP.P vs Other</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>FD vs Spac_</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>MVP.hot6 vs TnC</span><span class="ev-timer">20:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l57"></span></div><div class="ev-ctrl"><span data-event-id="3314">World Cyber Arena</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Open Qualifier Finals</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>STARK vs CIS-R</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>Empire vs Alliance</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l today">
+					<div>
+						<div>
+							<span>Sunday</span>
+							2						</div>
+						<div class="ev-feed" data-day="2">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l108"></span></div><div class="ev-ctrl"><span data-event-id="3318">ProDota Cup</span></div></div><span class="ev-timer">01:30</span></div>
+								<div class="ev-stage">National Cup Winners&#039; Round 1</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Other vs TBD</span><span class="ev-timer">01:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l128"></span></div><div class="ev-ctrl"><span data-event-id="3322">PGL Dota 2 Pro-AM</span></div></div><span class="ev-timer">01:30</span></div>
+								<div class="ev-stage">Round of 16</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>LC vs Other</span><span class="ev-timer">01:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3296">Game Show League</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>coL vs Archon</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>Leviathan vs Archon</span><span class="ev-timer">04:30</span></div>
+										<div><span ><span class="ev e15"></span>Leviathan vs Other</span><span class="ev-timer">06:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3243">StarSeries</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">SEA Qualifier: Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Other vs Signature</span><span class="ev-timer">15:30</span></div>
+										<div><span ><span class="ev e15"></span>FD vs TnC</span><span class="ev-timer">18:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3219">Game Show League</span></div></div><span class="ev-timer">18:30</span></div>
+								<div class="ev-stage">SEA Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>MVP.hot6 vs G7</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>MVP.hot6 vs Other</span><span class="ev-timer">20:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3256">StarSeries</span></div></div><span class="ev-timer">18:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Vega vs HR</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>OG vs SFZ</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>Alliance vs Empire</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l128"></span></div><div class="ev-ctrl"><span data-event-id="3321">PGL Dota 2 Pro-AM</span></div></div><span class="ev-timer">20:00</span></div>
+								<div class="ev-stage">Round of 16</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>CIS-R vs GOOMBA</span><span class="ev-timer">20:00</span></div>
+										<div><span ><span class="ev e15"></span>STARK vs BRM</span><span class="ev-timer">22:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l10"></span></div><div class="ev-ctrl"><span data-event-id="3078">DreamLeague</span></div></div><span class="ev-timer">22:30</span></div>
+								<div class="ev-stage">League Play</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>4C&amp;L vs Vega</span><span class="ev-timer">23:00</span></div>
+										<div><span ><span class="ev e15"></span>4C&amp;L vs OG</span><span class="ev-timer">01:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3226">Game Show League</span></div></div><span class="ev-timer">22:30</span></div>
+								<div class="ev-stage">EU Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>NLG vs Golden Boys</span><span class="ev-timer">22:30</span></div>
+										<div><span ><span class="ev e15"></span>GOOMBA vs Golden Boys</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Monday</span>
+							3						</div>
+						<div class="ev-feed" data-day="3">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3309">Game Show League</span></div></div><span class="ev-timer">00:30</span></div>
+								<div class="ev-stage">CIS Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>CIS-R vs SFZ</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l108"></span></div><div class="ev-ctrl"><span data-event-id="3319">ProDota Cup</span></div></div><span class="ev-timer">01:30</span></div>
+								<div class="ev-stage">National Cup Winners&#039; Round 1</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Other vs TBD</span><span class="ev-timer">01:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3297">Game Show League</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Root vs Not Today</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>E.Wolves vs Other</span><span class="ev-timer">04:30</span></div>
+										<div><span ><span class="ev e15"></span>Root vs Other</span><span class="ev-timer">06:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3302">StarSeries</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>coL vs Archon</span><span class="ev-timer">02:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3094">The Summit</span></div></div><span class="ev-timer">14:30</span></div>
+								<div class="ev-stage">SEA Qualifiers LBF&amp;GF</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Mineski vs Signature</span><span class="ev-timer">14:30</span></div>
+										<div><span ><span class="ev e15"></span>Fnatic vs TBD</span><span class="ev-timer">17:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3123">The Summit</span></div></div><span class="ev-timer">14:30</span></div>
+								<div class="ev-stage">CN Qualifiers LR2</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>NewBee vs LGD</span><span class="ev-timer">14:30</span></div>
+										<div><span ><span class="ev e15"></span>CDEC vs iG</span><span class="ev-timer">17:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3220">Game Show League</span></div></div><span class="ev-timer">18:30</span></div>
+								<div class="ev-stage">SEA Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Other vs TBD</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>Signature vs Other</span><span class="ev-timer">20:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3310">Game Show League</span></div></div><span class="ev-timer">20:30</span></div>
+								<div class="ev-stage">CIS Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Vega vs HR</span><span class="ev-timer">20:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l10"></span></div><div class="ev-ctrl"><span data-event-id="3079">DreamLeague</span></div></div><span class="ev-timer">22:30</span></div>
+								<div class="ev-stage">League Play</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>MFF vs OG</span><span class="ev-timer">23:00</span></div>
+										<div><span ><span class="ev e15"></span>NiP vs Vega</span><span class="ev-timer">01:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3225">Game Show League</span></div></div><span class="ev-timer">22:30</span></div>
+								<div class="ev-stage">EU Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>4C&amp;L vs NLG</span><span class="ev-timer">22:30</span></div>
+										<div><span ><span class="ev e15"></span>NLG vs GOOMBA</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Tuesday</span>
+							4						</div>
+						<div class="ev-feed" data-day="4">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3298">Game Show League</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Leviathan vs paiN</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>Other vs Void Boys</span><span class="ev-timer">04:30</span></div>
+										<div><span ><span class="ev e15"></span>Other vs TBD</span><span class="ev-timer">06:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3103">The Summit</span></div></div><span class="ev-timer">03:30</span></div>
+								<div class="ev-stage">AM Qualifiers LR4&amp;LR5</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>C9 vs E.Wolves</span><span class="ev-timer">03:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs coL</span><span class="ev-timer">06:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3124">The Summit</span></div></div><span class="ev-timer">14:30</span></div>
+								<div class="ev-stage">CN Qualifiers LR3</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">14:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3244">StarSeries</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">SEA Qualifier: Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>MVP.P vs TnC</span><span class="ev-timer">15:30</span></div>
+										<div><span ><span class="ev e15"></span>FD vs Mineski</span><span class="ev-timer">18:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3221">Game Show League</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">SEA Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Signature vs Spac_</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>Other vs Spac_</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>Signature vs Other</span><span class="ev-timer">20:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l10"></span></div><div class="ev-ctrl"><span data-event-id="3080">DreamLeague</span></div></div><span class="ev-timer">20:00</span></div>
+								<div class="ev-stage">League Play</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>NiP vs OG</span><span class="ev-timer">20:30</span></div>
+										<div><span ><span class="ev e15"></span>4C&amp;L vs MFF</span><span class="ev-timer">23:00</span></div>
+										<div><span ><span class="ev e15"></span>4C&amp;L vs NLG</span><span class="ev-timer">01:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3086">The Summit</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifiers LR2&amp;LR3</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Alliance vs VP</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>Vega vs NiP</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3224">Game Show League</span></div></div><span class="ev-timer">22:30</span></div>
+								<div class="ev-stage">EU Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>ATN vs Other</span><span class="ev-timer">22:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3311">Game Show League</span></div></div><span class="ev-timer">22:30</span></div>
+								<div class="ev-stage">CIS Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Empire vs TBD</span><span class="ev-timer">22:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Wednesday</span>
+							5						</div>
+						<div class="ev-feed" data-day="5">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3299">Game Show League</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>E.Wolves vs Not Today</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>paiN vs Other</span><span class="ev-timer">04:30</span></div>
+										<div><span ><span class="ev e15"></span>E.Wolves vs Void Boys</span><span class="ev-timer">06:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3102">The Summit</span></div></div><span class="ev-timer">03:30</span></div>
+								<div class="ev-stage">AM Qualifiers WBF&amp;LBF</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Root vs DC</span><span class="ev-timer">03:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">06:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3125">The Summit</span></div></div><span class="ev-timer">14:30</span></div>
+								<div class="ev-stage">CN Qualifiers WBF</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>VG vs EHOME</span><span class="ev-timer">14:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3245">StarSeries</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">SEA Qualifier: Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>MVP.P vs Mineski</span><span class="ev-timer">15:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3222">Game Show League</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">SEA Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>MVP.hot6 vs Mineski</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>TnC vs Other</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>FD vs Other</span><span class="ev-timer">20:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l10"></span></div><div class="ev-ctrl"><span data-event-id="3081">DreamLeague</span></div></div><span class="ev-timer">20:00</span></div>
+								<div class="ev-stage">League Play</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Alliance vs Vega</span><span class="ev-timer">20:30</span></div>
+										<div><span ><span class="ev e15"></span>NLG vs OG</span><span class="ev-timer">23:00</span></div>
+										<div><span ><span class="ev e15"></span>NLG vs NiP</span><span class="ev-timer">01:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3087">The Summit</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifiers WBF&amp;LR3</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Liquid vs TBD</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>OG vs TBD</span><span class="ev-timer">02:00</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3223">Game Show League</span></div></div><span class="ev-timer">22:30</span></div>
+								<div class="ev-stage">EU Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>NiP vs LC</span><span class="ev-timer">22:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Thursday</span>
+							6						</div>
+						<div class="ev-feed" data-day="6">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3248">StarSeries</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>E.Wolves vs DC</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>Root vs DC</span><span class="ev-timer">05:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l49"></span></div><div class="ev-ctrl"><span data-event-id="3300">Game Show League</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: 2nd Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>coL vs Leviathan</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>coL vs Other</span><span class="ev-timer">04:30</span></div>
+										<div><span ><span class="ev e15"></span>Leviathan vs Other</span><span class="ev-timer">06:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3104">The Summit</span></div></div><span class="ev-timer">03:30</span></div>
+								<div class="ev-stage">AM Qualifiers Finals</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">03:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3126">The Summit</span></div></div><span class="ev-timer">14:30</span></div>
+								<div class="ev-stage">CN Qualifiers LBF</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">14:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3246">StarSeries</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">SEA Qualifier: Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TnC vs Mineski</span><span class="ev-timer">15:30</span></div>
+										<div><span ><span class="ev e15"></span>123 vs Other</span><span class="ev-timer">18:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3185">ECL</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>DK.S vs Wings</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>Newbee.Y vs FTDc</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l15"></span></div><div class="ev-ctrl"><span data-event-id="3316">Dota 2 Champion&#039;s League</span></div></div><span class="ev-timer">20:30</span></div>
+								<div class="ev-stage">Semi Finals</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>OG vs Empire</span><span class="ev-timer">20:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3088">The Summit</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifiers LR4</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">21:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Friday</span>
+							7						</div>
+						<div class="ev-feed" data-day="7">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3247">StarSeries</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Unknown.xiu vs DC</span><span class="ev-timer">02:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3186">ECL</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>DK.S vs FTDc</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>Newbee.Y vs CDEC</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3257">StarSeries</span></div></div><span class="ev-timer">18:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>4C&amp;L vs HR</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>OG vs STARK</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>OG vs Na`Vi</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l20"></span></div><div class="ev-ctrl"><span data-event-id="3089">The Summit</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifiers LBF</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">21:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+</tr><tr>				<td class="evc-l">
+					<div>
+						<div>
+							<span>Saturday</span>
+							8						</div>
+						<div class="ev-feed" data-day="8">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3258">StarSeries</span></div></div><span class="ev-timer">18:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>4C&amp;L vs Golden Boys</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>Liquid vs Other</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>Empire vs PR</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Sunday</span>
+							9						</div>
+						<div class="ev-feed" data-day="9">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3259">StarSeries</span></div></div><span class="ev-timer">18:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>HR vs Golden Boys</span><span class="ev-timer">18:30</span></div>
+										<div><span ><span class="ev e15"></span>Liquid vs CIS-R</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>Liquid vs NiP</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Monday</span>
+							10						</div>
+						<div class="ev-feed" data-day="10">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Tuesday</span>
+							11						</div>
+						<div class="ev-feed" data-day="11">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Wednesday</span>
+							12						</div>
+						<div class="ev-feed" data-day="12">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Thursday</span>
+							13						</div>
+						<div class="ev-feed" data-day="13">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3187">ECL</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>DK.S vs CDEC</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>Wings vs FTDc</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Friday</span>
+							14						</div>
+						<div class="ev-feed" data-day="14">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3188">ECL</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Newbee.Y vs Wings</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>CDEC vs FTDc</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+</tr><tr>				<td class="evc-l">
+					<div>
+						<div>
+							<span>Saturday</span>
+							15						</div>
+						<div class="ev-feed" data-day="15">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Sunday</span>
+							16						</div>
+						<div class="ev-feed" data-day="16">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Monday</span>
+							17						</div>
+						<div class="ev-feed" data-day="17">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Tuesday</span>
+							18						</div>
+						<div class="ev-feed" data-day="18">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Wednesday</span>
+							19						</div>
+						<div class="ev-feed" data-day="19">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Thursday</span>
+							20						</div>
+						<div class="ev-feed" data-day="20">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3189">ECL</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TongFu vs VG.P</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>FTDb vs TRG</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Friday</span>
+							21						</div>
+						<div class="ev-feed" data-day="21">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3190">ECL</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TongFu vs FTDb</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>VG.P vs BHeart</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+</tr><tr>				<td class="evc-l">
+					<div>
+						<div>
+							<span>Saturday</span>
+							22						</div>
+						<div class="ev-feed" data-day="22">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Sunday</span>
+							23						</div>
+						<div class="ev-feed" data-day="23">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Monday</span>
+							24						</div>
+						<div class="ev-feed" data-day="24">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3260">StarSeries</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>NiP vs Other</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>NiP vs CIS-R</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Tuesday</span>
+							25						</div>
+						<div class="ev-feed" data-day="25">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3261">StarSeries</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Empire vs ATN</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>Na`Vi vs SFZ</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Wednesday</span>
+							26						</div>
+						<div class="ev-feed" data-day="26">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3262">StarSeries</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>PR vs ATN</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>STARK vs Na`Vi</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Thursday</span>
+							27						</div>
+						<div class="ev-feed" data-day="27">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3191">ECL</span></div></div><span class="ev-timer">16:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TongFu vs BHeart</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>VG.P vs TRG</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3263">StarSeries</span></div></div><span class="ev-timer">21:30</span></div>
+								<div class="ev-stage">EU Qualifier: 1st Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>CIS-R vs Other</span><span class="ev-timer">21:30</span></div>
+										<div><span ><span class="ev e15"></span>STARK vs SFZ</span><span class="ev-timer">00:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Friday</span>
+							28						</div>
+						<div class="ev-feed" data-day="28">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3279">StarSeries</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">05:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l3"></span></div><div class="ev-ctrl"><span data-event-id="3192">ECL</span></div></div><span class="ev-timer">14:30</span></div>
+								<div class="ev-stage">Group Stage</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TongFu vs TRG</span><span class="ev-timer">14:30</span></div>
+										<div><span ><span class="ev e15"></span>FTDb vs BHeart</span><span class="ev-timer">14:30</span></div>
+										<div><span ><span class="ev e15"></span>VG.P vs FTDb</span><span class="ev-timer">16:30</span></div>
+										<div><span ><span class="ev e15"></span>TRG vs BHeart</span><span class="ev-timer">16:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+</tr><tr>				<td class="evc-l">
+					<div>
+						<div>
+							<span>Saturday</span>
+							29						</div>
+						<div class="ev-feed" data-day="29">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3280">StarSeries</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">05:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l">
+					<div>
+						<div>
+							<span>Sunday</span>
+							30						</div>
+						<div class="ev-feed" data-day="30">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3281">StarSeries</span></div></div><span class="ev-timer">02:30</span></div>
+								<div class="ev-stage">AM Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">02:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">05:30</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3282">StarSeries</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">SEA Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>Fnatic vs TBD</span><span class="ev-timer">15:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">18:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l mo_out">
+					<div>
+						<div>
+							<span>Monday</span>
+December							1						</div>
+						<div class="ev-feed" data-day="1">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3283">StarSeries</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">SEA Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">15:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">18:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l mo_out">
+					<div>
+						<div>
+							<span>Tuesday</span>
+							2						</div>
+						<div class="ev-feed" data-day="2">
+							<div class="ev-block">
+								<div class="ev-head"><div><div class="icon-container"><span class="league-sprite-small l14"></span></div><div class="ev-ctrl"><span data-event-id="3284">StarSeries</span></div></div><span class="ev-timer">15:30</span></div>
+								<div class="ev-stage">SEA Qualifier: Playoffs</div>
+								<div class="ev-body">
+									<div class="ev-match">
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">15:30</span></div>
+										<div><span ><span class="ev e15"></span>TBD vs TBD</span><span class="ev-timer">18:30</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td class="evc-l mo_out">
+					<div>
+						<div>
+							<span>Wednesday</span>
+							3						</div>
+						<div class="ev-feed" data-day="3">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l mo_out">
+					<div>
+						<div>
+							<span>Thursday</span>
+							4						</div>
+						<div class="ev-feed" data-day="4">
+						</div>
+					</div>
+				</td>
+				<td class="evc-l mo_out">
+					<div>
+						<div>
+							<span>Friday</span>
+							5						</div>
+						<div class="ev-feed" data-day="5">
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr><td colspan="7"></td></tr>
+			<tr>
+				<td colspan="7">
+					<div>
+						<div><span>Selected Day</span><span id="feedday">23</span></div><div id="feedcontent"></div>
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+
+<script type="text/javascript">
+function updateCal ()
+{
+	var url = getCalendarURL ();
+	window.location = url;
+}
+
+function getCalendarURL ()
+{
+	var mode = $('#calendar_view').val ();
+	var team_filter = $('#team_filter').val ();
+	var league_filter = $('#league_filter').val ();
+	var month = $('#calendar_month').val ();
+	var year = $('#calendar_year').val ();
+	var day = $('#calendar_day').val ();
+
+	url = '/calendar/?view=' + mode + '&year=' + year + '&month=' + month + '&day=' + day + '&team=' + team_filter + '&league=' + league_filter;
+	return url;
+}
+
+$(document).ready (function() {
+	$(document).on ('click', '.switchview', function() {
+		if ($(this).data('view') == 'week' && $('#calendar_view').val() != $(this).data('view')) {
+			$('#calendar_day').val ("");
+			$('#calendar_month').val ("");
+			$('#calendar_year').val ("");
+		}
+		$('#calendar_view').val ($(this).data('view'));
+		updateCal ();
+	});
+
+	$(document).on ('click', '.switchday', function() {
+		$('#calendar_year').val ($(this).data('year'));
+		$('#calendar_month').val ($(this).data('month'));
+		$('#calendar_day').val ($(this).data('day'));
+
+		updateCal ();
+	});
+
+	$(document).on ('change', '.filterlist', function() {
+		updateCal ();
+	});
+
+	$(document).on ('click', '.evc-l', function() {
+		$('#feedday').text ($(this).find ('.ev-feed').data ('day'));
+		$('#feedcontent').html ($(this).find ('.ev-feed').html());
+	});
+
+	$(document).on ('click', '.calsubmit button', function() {
+		window.location = '/calendar/manage';
+	});
+});
+
+function refreshCalendarDiv ()
+{
+	$.get (getCalendarURL() + "&fmt=json", function (data) {
+		$('#calendar').html (data.html);
+		setupEventCalendarBindings ();
+	});
+}
+</script>
+
+<!-- google_ad_section_end --></div>
+					</div><!-- navwrap -->
+<footer>
+						<span style='font-size:8pt'><a href="/privacy/">Privacy Policy</a> | <a href="/tou/">Terms Of Use</a> | <a href="/contactus.php" rel="nofollow">Contact Us</a>
+						<!--<span style='font-size:8pt'><a HREF="/advertising/">Advertising</A> |
+						<a href="/jobs/">Jobs</a> |
+						<a href="/privacy/">Privacy</a> |
+						<a href="/tou/">Terms Of Use</a> |
+						<a href="/contactus.php" rel="nofollow">Contact Us</a>-->
+						<br><br>
+						Original banner artwork: Lip Comarella / SalonAlpin.						<br>
+						The contents of this webpage are copyright &copy; 2015 LiquidDota.com. All Rights Reserved.</span>
+				
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-576564-16', 'liquiddota.com');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Quantcast Tag -->
+<script type="text/javascript">
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push({
+qacct:"p-c4R4Uj3EI2IsY"
+});
+</script>
+
+<noscript>
+<div style="display:none;">
+<img src="//pixel.quantserve.com/pixel/p-c4R4Uj3EI2IsY.gif" border="0" height="1" width="1" alt="Quantcast">
+</div>
+</noscript>
+
+
+
+<!-- End Quantcast tag -->
+
+
+
+<!-- <audio src="/media/horn.ogg" style="display:none" preload="auto" id="dota-sfx-horn"></audio>-->
 </body>
 </html>
